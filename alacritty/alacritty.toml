@@ -1,0 +1,39 @@
+
+[cursor]
+#blink = true
+style = "beam"
+thickness = 0.2
+unfocused_hollow = false
+
+[font]
+size = 8
+
+[font.bold]
+family = "Iosevka"
+style = "Bold"
+
+[font.bold_italic]
+family = "Iosevka"
+style = "Bold Italic"
+
+[font.italic]
+family = "Iosevka"
+style = "Italic"
+
+[font.normal]
+family = "Iosevka"
+style = "Medium"
+
+[terminal.shell]
+program = "/bin/bash"
+
+[window.padding]
+x = 30
+y = 30
+
+#[window.scrolling]
+#history = 15
+
+[general]
+import = ["/home/anthony/.config/alacritty/themes/theme.toml"]
+
