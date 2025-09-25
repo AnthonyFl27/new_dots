@@ -35,5 +35,5 @@ y = 30
 #history = 15
 
 [general]
-import = ["/home/anthony/.config/alacritty/themes/theme.toml"]
+import = ["themes/mountain.toml"]
 

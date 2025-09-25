@@ -27,11 +27,22 @@ get_wifi_info() {
     fi
 }
 
+get_brightness() {
+    if command -v brightnessctl >/dev/null 2>&1; then
+        brightnessctl -m | awk -F, '{print $4}' | tr -d '%'
+    else
+        echo "N/A"
+    fi
+}
+
+
 while true; do
   BATTERY=$(cat /sys/class/power_supply/BAT0/capacity 2> /dev/null)
   TIME=$(date "+%I:%M %p")
   VOLUME=$(amixer get Master | grep '%' | head -n 1 | cut -d '[' -f 2 | cut -d ']' -f 1)
   wifi_info=$(get_wifi_info)
+  BRIGHTNESS=$(get_brightness)
+
 
   # Obtener el número de actualizaciones
   updates=$(get_updates)
@@ -41,7 +52,7 @@ while true; do
 
   # Determinar el mensaje de actualización
   if [[ "$total_updates" -gt 0 ]]; then
-    update_message="📦"
+    update_message=" "
     if [[ "$pacman_updates" -gt 0 ]]; then
       update_message+=" ${pacman_updates}(P)"
     fi
@@ -53,8 +64,8 @@ while true; do
   fi
 
   # Mostrar el estado
-  xsetroot -name "$update_message | $TIME | VOL: $VOLUME | BAT: $BATTERY% | $wifi_info"
+  xsetroot -name "$update_message | $TIME | VOL: $VOLUME | BRI: $BRIGHTNESS% | BAT: $BATTERY% | $wifi_info"
 
-  sleep 5
+  sleep 1
 done
 

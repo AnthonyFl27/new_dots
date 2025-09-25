@@ -1,5 +1,5 @@
 /* See LICENSE file for copyright and license details. */
-
+#include <X11/XF86keysym.h>
 /* appearance */
 static const unsigned int borderpx  = 5;        /* border pixel of windows */
 static const unsigned int snap      = 30;       /* snap pixel */
@@ -61,15 +61,15 @@ static const char *termcmd[]  = { "alacritty", NULL };
 static char *flameshotcmd[] = { "flameshot", "gui", NULL };
 
 static const char *const autostart[] = {
-    "/home/anthony/Documentos/DWM/dwm/status.sh", NULL,
+    "status.sh", NULL,
     NULL 
 };
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
-	{ MODKEY,                       XK_space,  spawn,          {.v = dmenucmd } },
-	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
-	{ MODKEY|ShiftMask,             XK_p,      spawn,          {.v = flameshotcmd } },
+	{ MODKEY,                       XK_space,  spawn,          {.v = dmenucmd } }, // lanzador dmenu
+	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } }, // terminal
+	{ MODKEY|ShiftMask,             XK_p,      spawn,          {.v = flameshotcmd } }, // flameshot (capturas)
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_Down,   focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_Up,     focusstack,     {.i = -1 } },
@@ -80,9 +80,9 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY,        		XK_q,      killclient,     {0} },
-	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
-	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
-	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
+	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} }, // layaut tiling 
+	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} }, // layaut floating
+	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} }, // layaut stacking
 	{ MODKEY,                       XK_n,	   setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_n,  	   togglefloating, {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
@@ -91,6 +91,17 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
+
+	/* Brillo */
+	{ 0,                       XF86XK_MonBrightnessDown, spawn, SHCMD("brightnessctl s 5%-") },
+	{ 0,                       XF86XK_MonBrightnessUp,   spawn, SHCMD("brightnessctl s +5%") },
+
+	/* Volumen */
+	{ 0,                       XF86XK_AudioMute,         spawn, SHCMD("pamixer -t") },
+	{ 0,                       XF86XK_AudioLowerVolume,  spawn, SHCMD("pamixer -d 5") },
+	{ 0,                       XF86XK_AudioRaiseVolume,  spawn, SHCMD("pamixer -i 5") },
+
+
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)

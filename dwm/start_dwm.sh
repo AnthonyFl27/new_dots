@@ -1,5 +1,5 @@
 #!/bin/bash
 
-/home/anthony/Documentos/dwm-src/dwm/status.sh &
+/home/anthony/new_dots/dwm/status.sh &
 nitrogen --restore &
 exec dwm

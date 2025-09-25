@@ -1,0 +1,7 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=DWM		
+Comment=Dynamic window manager
+Exec=/home/anthony/new_dots/dwm/start_dwm.sh
+Type=XSession
+
